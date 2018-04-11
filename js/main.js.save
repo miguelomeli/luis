@@ -1,0 +1,122 @@
+$("body").vegas({
+    delay:9000,
+    transition:["blur","zoomOut","swirRight","swirLeft"],
+    animationDuration: "auto",
+    loop:true,
+    transitionDuration:"auto",
+    timer:true,
+    animations:"random",
+    slides:[
+       /*{ src:"src/img/ruta_artesanos.png",
+         video: {
+           src:["src/vid/test.mp4"],
+           loop:false,
+           mute:true
+         },
+         slide:"fade"
+       },*/
+       {src:"src/img/ruta_artesanos.png"},
+       {src:"src/img/flow1.jpg"},
+       {src:"src/img/flow2.jpg"},
+     {src:"src/img/ruta_artesanos2.png"},       
+       {src:"src/img/flow3.jpg"},
+       {src:"src/img/flow4.jpg"}         
+    ],    
+    overlay: "vegas/overlays/02.png"
+});
+
+$("#alianza").vegas({
+   /*slides:[
+      {src:"src/img/alianza_logo.png"}      
+   ],*/
+   overlay: "vegas/overlays/02.png"
+});
+
+$("#stopSlide").vegas({
+   transition:"slideLeft",
+   transitionDuration:5500,
+   autoplay:false,
+   loop:false,
+   timer:false,
+   overlay:false,
+   slides:[
+     {src:"src/img/ruta_artesanos.png"},
+     //{src:"src/img/ruta_artesanos2.png"},
+     {src:"src/img/ruta_artesanos2.png"}      
+   ]
+   //,overlay: "vegas/overlays/02.png"
+});
+
+var interval;
+var dtinterval;
+
+
+function getpos()
+{
+  var ajax;
+  if(window.XMLHttpRequest)
+     ajax = new XMLHttpRequest();
+  else
+     ajax = new ActiveXObject("Microsoft.XMLHTTP");
+  ajax.onreadystatechange = function()
+  {
+     if(this.readyState == 4 && this.status == 200)
+     {
+        //$("#vid").pause();
+        $(".stop-info").show(1000);
+        //console.log("RECEIVED: "+this.responseText);
+        var tojson = JSON.parse(this.responseText);
+        $("#stopSlide").vegas("play");
+        //OBTENER NOMBRE Y RECURSO DESDE JSON        
+        $("#sName").html("GLORIETA DEL CHARRO");
+        $("#sImg").append("<img id='imgCharro' width='72px' height='72px' src='src/img/stops/charro_ico.png'></img>");
+        $("#sMap").attr("src","src/img/stops/loc_charro.png");
+        //$("#sMap").append("<img id='imgMap' width='72px' height='72px' src='src/img/stops/loc_charro.png'></img>");         
+        $("#audio").attr("src","src/audio/prox_stop.mp3");
+        $("#audio").attr("autoplay","true");
+        $("#sLat").html("Latitud: "+tojson["lat"]+" "+tojson["latdir"]);
+        $("#sLon").html("Longitud: "+tojson["lon"]+" "+tojson["londir"]);
+        $("#update").html("Última actualización "+
+                           tojson["date"].substr(0,2)+
+                           "/"+tojson["date"].substr(2,2)+
+                           "/20"+tojson["date"].substr(4,2)+
+                           " "+tojson["time"].substr(0,2)+
+                           ":"+tojson["time"].substr(2,2)+
+                           ":"+tojson["time"].substr(4,2) );
+        $("#stopSlide").vegas('play');
+        setTimeout(function(){
+           $(".stop-info").hide(500);
+           $("#imgCharro").remove();
+           $("#imgMap").remove();
+           //$("#vid").play();
+        },10000);
+     }
+     else if(this.readyState == 4 || this.status == 400  || this.status == 300)
+     {
+        console.log("ERROR: "+this.responseText);
+     }
+  };
+    ajax.open("POST","cgi-bin/pos.cgi", true);
+    ajax.send();
+  }
+  
+  function showdt()
+  {
+    var d = new Date($.now());
+    var h = d.getHours();
+    var m = d.getMinutes();
+    var s = d.getSeconds();
+    $("#currdt").html((h<10?"0"+h:h)+":"+(m<10?"0"+m:m)+":"+(s<10?"0"+s:s));
+  }
+  
+  window.onload = function()
+  {
+    showdt();
+    dtinterval = setInterval(showdt,5000)
+    interval = setInterval(getpos,15000);
+    $(".stop-info").hide();
+    //$("#vid").loop=false;
+    //$("#vid").autoplay=true;
+    //$("#vid").play();
+    //$("#vid").addEventListener("ended",);
+  };

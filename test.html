@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8" >
+  <meta name="description" content="Prototipo indicación de paradas">
+  <title>Ruta Artesanos</title>
+  <link rel="stylesheet" href="https://openlayers.org/en/v4.0.1/css/ol.css" type="text/css">
+  <style>
+   .map{
+     height:400px;
+     width:100%;
+   }
+  </style>
+  <script src="https://openlayers.org/en/v4.0.1/build/ol.js" type="text/javascript"></script>
+ </head>
+ <body>
+  <!-- <div id="mapa" class="map"></div> -->
+  <video id="vid" height="320px" width="100%">
+    <source src="src/test.mp4" type="video/mp4"></source>
+  </video>
+  <p id="nxtStop"></p>
+  <script type="text/javascript">
+      var map = new ol.Map({
+        target: 'mapa',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([-103.3184, 20.6454]), //20.6454, -103.3184]),
+          zoom: 15
+        })
+      });
+  </script>
+  <script>
+  var interval;
+  function getpos()
+  {
+    var ajax;
+    if(window.XMLHttpRequest)
+       ajax = new XMLHttpRequest();
+    else
+      ajax = new ActiveXObject("Microsoft.XMLHTTP");
+    ajax.onreadystatechange = function()
+    {
+       if(this.readyState == 4 && this.status == 200)
+       {
+          document.getElementById("vid").pause();
+          console.log("RECEIVED: "+this.responseText);
+          var tojson = JSON.parse(this.responseText);
+          document.getElementById("nxtStop").innerHTML = "LATITUD: "+tojson["lat"]+" "+tojson["latdir"]+"\nLONGITUD: "+tojson["lon"]+" "+tojson["londir"];
+          setTimeout(function(){
+             document.getElementById("vid").play();
+          },3000);
+       }
+       else if(this.readyState == 4 || this.status == 400  || this.status == 300)
+       {
+          console.log("ERROR: "+this.responseText);
+       }
+    };
+    ajax.open("POST","cgi-bin/pos.cgi", true);
+    ajax.send();
+  }
+  //function()
+  window.onload = function()
+  {
+    interval = setInterval(getpos,10000);
+    document.getElementById("vid").loop=false;
+    //document.getElementById("vid").autoplay=true;
+    document.getElementById("vid").play();
+    //document.getElementById("vid").addEventListener("ended",);
+  };  
+  </script>
+  
+ </body>
+</html>

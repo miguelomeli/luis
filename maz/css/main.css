@@ -1,0 +1,140 @@
+.vegas-timer-progress{
+  background-color:#8E44AD;
+}
+
+.vegas-wrapper{
+  overflow:hidden;
+  padding:0px;
+}
+
+.identifier{
+  width 54%;
+  float: left;
+}
+
+.graphic{
+  width:46%
+  float:left;
+}
+
+.stop-info{
+  position:absolute !important;
+  width:90%;
+  right:5%;
+  top:8%;
+  bottom:8%;
+  background-color:#eaeded;
+  border: 5px solid #9d0a0e;
+  box-sizing:border-box;
+  box-shadow:0 10px 35px #000;
+  /*font-size:.85em;
+  right:3.5em;
+  bottom:3em;*/
+}
+
+#nxtStop{
+  position: absolute;
+  top: 3%;
+  left: 5%;
+}
+
+#stopSlide{
+  background-color:pink;
+  position: absolute;
+  width:inherit;
+  height:inherit;
+  right:5%;
+  top:8%;
+  bottom:8%;
+  border: 5px solid #0f0;
+}
+
+.stop-attr li{
+  font-weight:900;
+  font-family:"Fashion";
+  line-height:2.2em;
+  list-style:none;
+  text-align: center;
+}
+
+.paradaAlimentadora{
+  font-size: 6.5em;
+  font-family: arial;
+  font-weight: bold;
+  color: #04B404;
+  text-align: center;
+}
+
+.paradaTroncal{
+  font-size: 5.5em;
+  font-family: arial;
+  font-weight: bold;
+  color: #fc0000;
+}
+
+.top-space{
+  margin-top: 8%;
+}
+
+.line0{  
+  font-size: 9.0em;
+  font-family: arial;
+  font-weight: bold;
+  color: black;
+}
+
+.line1{
+  font-size: 6.0em;
+  font-family: arial;
+  font-weight: bold;
+  color: black;
+}
+
+.line2{
+  font-size:1em;
+}
+
+#currdt{
+  width:16%;
+  height:auto;
+  position:absolute;
+  right:2%;
+  bottom:0.5%;
+  background-color:#c0392b;
+  font-size:2.7em;
+  font-weight:bold;
+  text-align:center;
+}
+
+.icon{
+  margint-top:15px;
+  /*border:*/
+  /*text-align:right;
+  margin-right:30px;*/
+}
+
+.map{
+  border:3px solid #424949;
+  max-width:300px;
+  max-height:300px;
+}
+
+.left-img
+{
+  max-width:300px;
+}
+
+.right-img
+{
+  max-width:400px;
+  max-height:400px;
+
+
+}
+
+.logo
+{
+  width:150px;
+  height:150px;
+}
+

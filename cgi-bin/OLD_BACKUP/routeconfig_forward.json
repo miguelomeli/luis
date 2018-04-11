@@ -1,0 +1,27 @@
+[
+ { "pos":1,
+   "routedir":"NS",
+   "longitude":-103.2971,
+   "londir":"W",
+   "latitude":20.7127,
+   "latdir":"N",
+   "stopname":"Periferico Norte",
+   "imgsrcname":"stopicon1.png",
+   "imgmapsrcname":"mapstop1.png",
+   "audiosrcname":"audiostop1.mp3",
+   "flag":true
+ },
+ { "pos":2,
+   "routedir":"NS",
+   "longitude":-103.2960,
+   "londir":"W",
+   "latitude":20.7067,
+   "latdir":"N",
+   "stopname":"Rivas Guillen",
+   "imgsrcname":"stopicon2.png",
+   "imgmapsrcname":"mapstop2.png",
+   "audiosrcname":"audiostop2.mp3",
+   "flag":true   
+ } 
+]
+
